@@ -30,6 +30,8 @@ agp = "9.1.1"
 coreKtx = "1.19.0"
 appcompat = "1.7.1"
 datastorePreferences = "1.2.1"
+hiltCompiler = "1.2.0"
+hiltWorkVersion = "1.2.0"
 material = "1.14.0"
 activity = "1.13.0"
 constraintlayout = "2.2.1"
@@ -64,6 +66,7 @@ firebaseDatabase = "22.0.1"
 firebaseStorage = "22.0.1"
 firebaseInappmessagingDisplay = "22.0.3"
 datastore = "1.1.7"
+workRuntimeKtx = "2.9.1"
 
 
 [libraries]
@@ -72,6 +75,9 @@ androidx-activity-ktx = { module = "androidx.activity:activity-ktx" }
 androidx-core-ktx = { group="androidx.core", name="core-ktx", version.ref="coreKtx" }
 androidx-appcompat = { group="androidx.appcompat", name="appcompat", version.ref="appcompat" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
+androidx-hilt-compiler-v120 = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler" }
+androidx-hilt-work-v120 = { module = "androidx.hilt:hilt-work", version.ref = "hiltWorkVersion" }
+androidx-work-runtime-ktx-v291 = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
 fragment-ktx = { module = "androidx.fragment:fragment-ktx" }
 material = { group="com.google.android.material", name="material", version.ref="material" }
 androidx-activity = { group="androidx.activity", name="activity", version.ref="activity" }

@@ -25,6 +25,9 @@ class AdminViewModel @Inject constructor(
     private val _userState = MutableStateFlow<Resource<User>>(Resource.Loading)
     val userState: StateFlow<Resource<User>> = _userState.asStateFlow()
 
+    private val _usersState = MutableStateFlow<Resource<List<User>>>(Resource.Loading)
+    val usersState: StateFlow<Resource<List<User>>> = _usersState.asStateFlow()
+
     private val _toastEvents = MutableSharedFlow<String>()
     val toastEvents: SharedFlow<String> = _toastEvents
 
@@ -35,9 +38,15 @@ class AdminViewModel @Inject constructor(
                 userRepository.observeCurrentUser(uid).collect { _userState.value = it }
             }
         }
+        loadAllUsers()
     }
 
-    /** Requirement #14/#12: only ever called from a screen already gated to ADMIN role. */
+    private fun loadAllUsers() {
+        viewModelScope.launch {
+            userRepository.getAllUsers().collect { _usersState.value = it }
+        }
+    }
+
     fun toggleDevMode(enabled: Boolean) {
         val uid = authRepository.getCurrentUserId() ?: return
         val currentRole = (_userState.value as? Resource.Success)?.data?.role ?: Role.USER

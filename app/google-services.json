@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "296429614032",
+    "firebase_url": "https://datasync-91c90-default-rtdb.firebaseio.com",
     "project_id": "datasync-91c90",
     "storage_bucket": "datasync-91c90.firebasestorage.app"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.bhushan.datasync.debug"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "296429614032-sm1516p5mnm7lahk4rn1uqdvpo96us2a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bhushan.datasync.debug",
+            "certificate_hash": "f921304bdd08779d93f8116662f8bf5d18ec0173"
+          }
+        },
+        {
+          "client_id": "296429614032-cinba0tkfcufanbiunapmvns33vosnp0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD9mDS9T2hPlsdcmg6Af2uF11pTjDdpi5A"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "296429614032-cinba0tkfcufanbiunapmvns33vosnp0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

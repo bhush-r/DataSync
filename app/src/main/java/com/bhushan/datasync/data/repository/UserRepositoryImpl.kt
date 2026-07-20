@@ -38,13 +38,28 @@ class UserRepositoryImpl @Inject constructor(
         awaitClose { registration.remove() }
     }
 
+    override fun getAllUsers(): Flow<Resource<List<User>>> = callbackFlow {
+        trySend(Resource.Loading)
+        val registration = firestore.collection(Constants.COLLECTION_USERS)
+            .orderBy(Constants.FIELD_CREATED_AT)
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    trySend(Resource.Error(error.localizedMessage ?: "Failed to load users"))
+                    return@addSnapshotListener
+                }
+                val users = snapshot?.documents?.mapNotNull { doc ->
+                    doc.toObject(User::class.java)?.copy(uid = doc.id)
+                }.orEmpty()
+                trySend(Resource.Success(users))
+            }
+        awaitClose { registration.remove() }
+    }
+
     override suspend fun updateFcmToken(uid: String, token: String) {
         try {
             firestore.collection(Constants.COLLECTION_USERS).document(uid)
                 .update(Constants.FIELD_FCM_TOKEN, token).await()
-        } catch (_: Exception) {
-            // Non-fatal: token will be retried on next login / message event.
-        }
+        } catch (_: Exception) {}
     }
 
     override suspend fun updateLastSyncTimestamp(uid: String, timestamp: Long) {
@@ -52,9 +67,7 @@ class UserRepositoryImpl @Inject constructor(
             firestore.collection(Constants.COLLECTION_USERS).document(uid)
                 .update(Constants.FIELD_LAST_SYNC_AT, timestamp).await()
             sessionManager.updateLastSync(timestamp)
-        } catch (_: Exception) {
-            // Sync itself already succeeded; failing to stamp the timestamp is non-fatal.
-        }
+        } catch (_: Exception) {}
     }
 
     override suspend fun setDevMode(uid: String, enabled: Boolean): Resource<Unit> {

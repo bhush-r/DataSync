@@ -7,22 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bhushan.datasync.databinding.FragmentAdminPanelBinding
 import com.bhushan.datasync.domain.model.Role
 import com.bhushan.datasync.utils.Resource
 import com.bhushan.datasync.utils.collectFlow
 import com.bhushan.datasync.utils.gone
+import com.bhushan.datasync.utils.setVisibleIf
 import com.bhushan.datasync.utils.toast
 import com.bhushan.datasync.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * Requirement #12/#13/#31: Admin-only screen. Even though the toolbar entry
- * point that leads here is hidden for non-admins, this Fragment independently
- * re-validates the role once its own data loads and kicks non-admins out --
- * defense in depth against a deep link or back-stack restoration bypassing
- * the menu visibility check.
- */
 @AndroidEntryPoint
 class AdminPanelFragment : Fragment() {
 
@@ -30,6 +25,7 @@ class AdminPanelFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: AdminViewModel by viewModels()
     private var isProgrammaticToggle = false
+    private val usersAdapter = UsersAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -40,6 +36,9 @@ class AdminPanelFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.recyclerViewUsers.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewUsers.adapter = usersAdapter
 
         binding.switchDevMode.setOnCheckedChangeListener { _, isChecked ->
             if (!isProgrammaticToggle) viewModel.toggleDevMode(isChecked)
@@ -67,6 +66,25 @@ class AdminPanelFragment : Fragment() {
                 is Resource.Error -> {
                     binding.progressBar.gone()
                     toast(resource.message)
+                }
+            }
+        }
+
+        collectFlow(viewModel.usersState) { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    binding.usersProgressBar.visible()
+                    binding.tvUsersEmpty.gone()
+                }
+                is Resource.Success -> {
+                    binding.usersProgressBar.gone()
+                    binding.tvUsersEmpty.setVisibleIf(resource.data.isEmpty())
+                    usersAdapter.submitList(resource.data)
+                }
+                is Resource.Error -> {
+                    binding.usersProgressBar.gone()
+                    binding.tvUsersEmpty.visible()
+                    binding.tvUsersEmpty.text = resource.message
                 }
             }
         }

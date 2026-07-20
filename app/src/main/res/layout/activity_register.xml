@@ -15,24 +15,10 @@
         android:gravity="center_vertical"
         android:minHeight="600dp">
 
-        <View
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:background="@drawable/bg_pill" />
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="-48dp"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/ic_sync"
-            app:tint="@color/md_theme_primary" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_lg"
-            android:text="@string/login_title"
+            android:text="@string/register_title"
             android:textAppearance="@style/TextAppearance.DataSync.Headline"
             android:textSize="26sp" />
 
@@ -40,17 +26,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_xs"
-            android:text="@string/login_subtitle"
+            android:text="@string/register_subtitle"
             android:textAppearance="@style/TextAppearance.DataSync.Body" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilName"
+            style="@style/Widget.DataSync.TextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:hint="@string/name_hint">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilEmail"
             style="@style/Widget.DataSync.TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_xl"
+            android:layout_marginTop="@dimen/spacing_md"
             android:hint="@string/email_hint">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
@@ -67,9 +67,24 @@
             android:layout_marginTop="@dimen/spacing_md"
             app:passwordToggleEnabled="true"
             android:hint="@string/password_hint">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilConfirmPassword"
+            style="@style/Widget.DataSync.TextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:passwordToggleEnabled="true"
+            android:hint="@string/confirm_password_hint">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -85,15 +100,15 @@
             android:textSize="13sp"
             android:visibility="gone"
             tools:visibility="visible"
-            tools:text="Incorrect email or password." />
+            tools:text="An account with this email already exists." />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnRegister"
             style="@style/Widget.DataSync.Button"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginTop="@dimen/spacing_lg"
-            android:text="@string/btn_login"
+            android:text="@string/btn_register"
             android:textAllCaps="false" />
 
         <ProgressBar
@@ -105,15 +120,14 @@
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/tvGoToRegister"
+            android:id="@+id/tvGoToLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_lg"
             android:layout_gravity="center"
             android:padding="@dimen/spacing_sm"
-            android:text="@string/dont_have_account"
+            android:text="@string/already_have_account"
             android:textColor="@color/md_theme_primary"
             android:textStyle="bold" />
-
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

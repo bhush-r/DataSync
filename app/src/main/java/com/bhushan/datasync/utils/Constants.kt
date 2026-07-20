@@ -1,12 +1,6 @@
 package com.bhushan.datasync.utils
 
-/**
- * Centralized constant values used across the app. Keeping every "magic
- * string" here avoids typos when the same Firestore collection / field name
- * is referenced from multiple repositories.
- */
 object Constants {
-
     // ---- Firestore top level collections -------------------------------
     const val COLLECTION_USERS = "users"
     const val SUBCOLLECTION_CONTACTS = "contacts"
@@ -18,9 +12,11 @@ object Constants {
 
     // ---- Firestore user document fields ---------------------------------
     const val FIELD_EMAIL = "email"
+    const val FIELD_NAME = "name"
     const val FIELD_ROLE = "role"
     const val FIELD_FCM_TOKEN = "fcmToken"
     const val FIELD_LAST_SYNC_AT = "lastSyncAt"
+    const val FIELD_LAST_LOGIN = "lastLogin"
     const val FIELD_DEV_MODE_ENABLED = "devModeEnabled"
     const val FIELD_CREATED_AT = "createdAt"
 
@@ -37,6 +33,10 @@ object Constants {
     const val WORK_NAME_PERIODIC_SYNC = "com.bhushan.datasync.PERIODIC_SYNC_WORK"
     const val WORK_NAME_ONE_TIME_SYNC = "com.bhushan.datasync.ONE_TIME_SYNC_WORK"
     const val SYNC_INTERVAL_MINUTES = 15L
+
+    // ---- FCM data-message triggered sync ---------------------------------
+    const val FCM_DATA_ACTION_KEY = "action"
+    const val FCM_DATA_ACTION_SYNC = "sync"
 
     // ---- Notifications -----------------------------------------------------
     const val NOTIFICATION_CHANNEL_ID = "datasync_channel"

@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.core.app.NotificationCompat
 import com.bhushan.datasync.R
 import com.bhushan.datasync.domain.repository.UserRepository
+import com.bhushan.datasync.sync.SyncScheduler
 import com.bhushan.datasync.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -15,12 +16,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/**
- * Requirement #6: keeps the FCM token in Firestore fresh for as long as the
- * user stays logged in (tokens can rotate at any time, not just at login).
- * Also renders any push notification the backend/console sends -- useful to
- * notify a user that a sync completed or that an admin changed their role.
- */
 @AndroidEntryPoint
 class DataSyncFcmService : FirebaseMessagingService() {
 
@@ -29,6 +24,9 @@ class DataSyncFcmService : FirebaseMessagingService() {
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
+
+    @Inject
+    lateinit var syncScheduler: SyncScheduler
 
     private val serviceScope = CoroutineScope(Dispatchers.IO)
 
@@ -42,6 +40,12 @@ class DataSyncFcmService : FirebaseMessagingService() {
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
+
+        // Remote Sync Execution Command Hook
+        if (message.data[Constants.FCM_DATA_ACTION_KEY] == Constants.FCM_DATA_ACTION_SYNC) {
+            syncScheduler.triggerOneTimeSync()
+        }
+
         val title = message.notification?.title ?: getString(R.string.app_name)
         val body = message.notification?.body ?: return
         showNotification(title, body)
