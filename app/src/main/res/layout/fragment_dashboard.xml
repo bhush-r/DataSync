@@ -28,7 +28,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="@dimen/spacing_md"
-                android:visibility="gone">
+                android:visibility="gone"
+                tools:visibility="visible">
 
                 <!-- Stat tiles row 1 -->
                 <LinearLayout
@@ -46,11 +47,23 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
-                            <ImageView
-                                android:layout_width="@dimen/icon_size"
-                                android:layout_height="@dimen/icon_size"
-                                android:src="@drawable/ic_contacts"
-                                app:tint="@color/md_theme_primary" />
+
+                            <FrameLayout
+                                android:layout_width="40dp"
+                                android:layout_height="40dp">
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/bg_circle"
+                                    android:backgroundTint="@color/md_theme_primaryContainer" />
+                                <ImageView
+                                    android:layout_width="@dimen/icon_size_sm"
+                                    android:layout_height="@dimen/icon_size_sm"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_contacts"
+                                    app:tint="@color/md_theme_primary" />
+                            </FrameLayout>
+
                             <TextView
                                 android:id="@+id/tvContactsCount"
                                 android:layout_width="wrap_content"
@@ -78,11 +91,23 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
-                            <ImageView
-                                android:layout_width="@dimen/icon_size"
-                                android:layout_height="@dimen/icon_size"
-                                android:src="@drawable/ic_call"
-                                app:tint="@color/md_theme_secondary" />
+
+                            <FrameLayout
+                                android:layout_width="40dp"
+                                android:layout_height="40dp">
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/bg_circle"
+                                    android:backgroundTint="@color/md_theme_secondaryContainer" />
+                                <ImageView
+                                    android:layout_width="@dimen/icon_size_sm"
+                                    android:layout_height="@dimen/icon_size_sm"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_call"
+                                    app:tint="@color/md_theme_secondary" />
+                            </FrameLayout>
+
                             <TextView
                                 android:id="@+id/tvCallLogsCount"
                                 android:layout_width="wrap_content"
@@ -112,22 +137,34 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
-                        <ImageView
-                            android:layout_width="@dimen/icon_size"
-                            android:layout_height="@dimen/icon_size"
-                            android:src="@drawable/ic_sms"
-                            app:tint="@color/md_theme_primary" />
+
+                        <FrameLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp">
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_circle"
+                                android:backgroundTint="@color/md_theme_primaryContainer" />
+                            <ImageView
+                                android:layout_width="@dimen/icon_size_sm"
+                                android:layout_height="@dimen/icon_size_sm"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_sms"
+                                app:tint="@color/md_theme_primary" />
+                        </FrameLayout>
+
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:layout_marginStart="@dimen/spacing_md"
                             android:text="@string/stat_sms"
                             android:textAppearance="@style/TextAppearance.DataSync.Body" />
                         <TextView
                             android:id="@+id/tvSmsCount"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:gravity="end"
                             android:textSize="@dimen/text_size_headline"
                             android:textStyle="bold"
@@ -160,8 +197,12 @@
                                 android:id="@+id/tvRole"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:background="@drawable/bg_status_chip"
+                                android:backgroundTint="@color/md_theme_primaryContainer"
+                                android:textColor="@color/md_theme_primary"
+                                android:textSize="@dimen/text_size_caption"
                                 android:textStyle="bold"
-                                android:textColor="@color/md_theme_primary" />
+                                tools:text="ADMIN" />
                         </LinearLayout>
                         <View
                             android:layout_width="match_parent"
@@ -201,11 +242,23 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
-                        <ImageView
-                            android:layout_width="@dimen/icon_size"
-                            android:layout_height="@dimen/icon_size"
-                            android:src="@drawable/ic_admin"
-                            app:tint="@color/admin_badge" />
+
+                        <FrameLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp">
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_circle"
+                                android:backgroundTint="@color/admin_badge_container" />
+                            <ImageView
+                                android:layout_width="@dimen/icon_size_sm"
+                                android:layout_height="@dimen/icon_size_sm"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_admin"
+                                app:tint="@color/admin_badge" />
+                        </FrameLayout>
+
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -229,7 +282,6 @@
                     android:layout_height="52dp"
                     android:layout_marginTop="@dimen/spacing_lg"
                     android:text="@string/sync_now"
-                    android:textAllCaps="false"
                     app:icon="@drawable/ic_sync" />
 
                 <ProgressBar
@@ -261,10 +313,23 @@
             android:gravity="center"
             android:padding="@dimen/spacing_xl"
             android:visibility="gone">
-            <ImageView
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:src="@drawable/ic_error" />
+
+            <FrameLayout
+                android:layout_width="88dp"
+                android:layout_height="88dp">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_circle"
+                    android:backgroundTint="@color/md_theme_errorContainer" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_error"
+                    app:tint="@color/md_theme_error" />
+            </FrameLayout>
+
             <TextView
                 android:id="@+id/tvErrorMessage"
                 android:layout_width="wrap_content"
@@ -274,12 +339,11 @@
                 android:textAppearance="@style/TextAppearance.DataSync.Body" />
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnRetry"
-                style="@style/Widget.Material3.Button.TonalButton"
+                style="@style/Widget.DataSync.Button.Tonal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_md"
-                android:text="@string/retry"
-                android:textAllCaps="false" />
+                android:text="@string/retry" />
         </LinearLayout>
 
     </FrameLayout>

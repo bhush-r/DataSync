@@ -10,8 +10,12 @@
         style="@style/Widget.DataSync.TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_md"
+        android:layout_marginHorizontal="@dimen/spacing_md"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:layout_marginBottom="@dimen/spacing_sm"
+        app:boxBackgroundColor="@color/md_theme_surface"
         app:startIconDrawable="@drawable/ic_search"
+        app:startIconTint="@color/text_hint"
         android:hint="@string/search_hint">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -32,6 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/spacing_md"
+            android:paddingTop="@dimen/spacing_xs"
             android:paddingBottom="@dimen/spacing_md" />
 
         <ProgressBar

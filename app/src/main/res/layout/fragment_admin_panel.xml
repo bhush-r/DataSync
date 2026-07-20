@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,20 +23,53 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="@dimen/spacing_md"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/admin_panel_title"
-                android:textAppearance="@style/TextAppearance.DataSync.Headline" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_xs"
-                android:text="@string/admin_only_notice"
-                android:textAppearance="@style/TextAppearance.DataSync.Body" />
+                <FrameLayout
+                    android:layout_width="@dimen/avatar_size"
+                    android:layout_height="@dimen/avatar_size">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_circle"
+                        android:backgroundTint="@color/admin_badge_container" />
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_md"
+                        android:layout_height="@dimen/icon_size_md"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_admin"
+                        app:tint="@color/admin_badge" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/spacing_md"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/admin_panel_title"
+                        android:textAppearance="@style/TextAppearance.DataSync.Headline"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/admin_only_notice"
+                        android:textAppearance="@style/TextAppearance.DataSync.Body" />
+                </LinearLayout>
+            </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
                 style="@style/Widget.DataSync.Card"
@@ -53,12 +87,22 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/icon_size_md"
+                            android:layout_height="@dimen/icon_size_md"
+                            android:src="@drawable/ic_dashboard"
+                            app:tint="@color/md_theme_primary" />
+
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginStart="@dimen/spacing_sm"
                             android:text="@string/dev_mode_toggle_label"
-                            android:textAppearance="@style/TextAppearance.DataSync.Body" />
+                            android:textAppearance="@style/TextAppearance.DataSync.Body"
+                            android:textColor="@color/text_primary" />
+
                         <com.google.android.material.materialswitch.MaterialSwitch
                             android:id="@+id/switchDevMode"
                             android:layout_width="wrap_content"
@@ -68,19 +112,22 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginVertical="@dimen/spacing_sm"
+                        android:layout_marginVertical="@dimen/spacing_md"
                         android:background="@color/divider" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Signed in as"
+                            android:text="@string/signed_in_as"
                             android:textAppearance="@style/TextAppearance.DataSync.Body" />
+
                         <TextView
                             android:id="@+id/tvAdminEmail"
                             android:layout_width="wrap_content"
@@ -96,9 +143,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_lg"
+                android:layout_marginStart="4dp"
                 android:text="@string/manage_users_title"
-                android:textAppearance="@style/TextAppearance.DataSync.Headline"
-                android:textSize="18sp" />
+                android:textAppearance="@style/TextAppearance.DataSync.Title" />
 
             <ProgressBar
                 android:id="@+id/usersProgressBar"
@@ -118,12 +165,19 @@
                 android:textAppearance="@style/TextAppearance.DataSync.Body"
                 android:visibility="gone" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewUsers"
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.DataSync.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:layout_marginTop="@dimen/spacing_sm" />
+                android:layout_marginTop="@dimen/spacing_sm"
+                app:contentPadding="0dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewUsers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </FrameLayout>

@@ -10,11 +10,18 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/md_theme_surface"
-        android:elevation="2dp"
+        android:background="@color/md_theme_background"
+        android:elevation="0dp"
         app:title="@string/app_name"
+        app:titleTextAppearance="@style/TextAppearance.DataSync.Title"
         app:titleTextColor="@color/text_primary"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
@@ -30,7 +37,10 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/md_theme_surface"
+        android:background="@drawable/bg_bottom_nav"
+        android:elevation="@dimen/elevation_bar"
+        app:itemIconTint="@color/md_theme_primary"
+        app:itemTextColor="@color/md_theme_primary"
         app:menu="@menu/bottom_nav_menu"
         app:layout_constraintBottom_toBottomOf="parent" />
 

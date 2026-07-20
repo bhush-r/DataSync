@@ -110,4 +110,9 @@
     <string name="call_type_outgoing">Outgoing</string>
     <string name="call_type_missed">Missed</string>
     <string name="call_type_unknown">Unknown</string>
+
+    <string name="empty_state_title">Nothing here yet</string>
+    <string name="empty_state_default_message">Items you add will show up here.</string>
+    <string name="record_sheet_subtitle">Fill in the details below</string>
+    <string name="signed_in_as">Signed in as</string>
 </resources>

@@ -1,9 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/md_theme_primary" />
-    <item android:width="120dp" android:height="120dp" android:gravity="center">
+
+    <!-- Base gradient wash -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="315"
+                android:startColor="@color/gradient_start"
+                android:endColor="@color/gradient_end" />
+        </shape>
+    </item>
+
+    <!-- Soft decorative ring, upper right -->
+    <item
+        android:width="260dp"
+        android:height="260dp"
+        android:gravity="top|end"
+        android:right="-90dp"
+        android:top="-90dp">
+        <shape android:shape="oval">
+            <stroke android:width="24dp" android:color="#14FFFFFF" />
+        </shape>
+    </item>
+
+    <!-- Soft decorative ring, lower left -->
+    <item
+        android:width="180dp"
+        android:height="180dp"
+        android:gravity="bottom|start"
+        android:left="-70dp"
+        android:bottom="-70dp">
+        <shape android:shape="oval">
+            <stroke android:width="18dp" android:color="#14FFFFFF" />
+        </shape>
+    </item>
+
+    <!-- Logo plate -->
+    <item android:width="96dp" android:height="96dp" android:gravity="center">
         <shape android:shape="oval">
             <solid android:color="@color/white" />
         </shape>
     </item>
-    <item android:width="72dp" android:height="72dp" android:gravity="center" android:drawable="@drawable/ic_sync" />
+
+    <item android:width="52dp" android:height="52dp" android:gravity="center"
+        android:drawable="@drawable/ic_sync" />
+
 </layer-list>

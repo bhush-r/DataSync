@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/spacing_lg">
+    android:background="@color/md_theme_surface"
+    android:paddingHorizontal="@dimen/spacing_lg"
+    android:paddingBottom="@dimen/spacing_lg">
+
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_drag_handle" />
 
     <TextView
         android:id="@+id/tvSheetTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_md"
         android:textAppearance="@style/TextAppearance.DataSync.Headline"
-        tools:text="Add Record"
-        xmlns:tools="http://schemas.android.com/tools" />
+        tools:text="Add Record" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="@string/record_sheet_subtitle"
+        android:textAppearance="@style/TextAppearance.DataSync.Body"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilTitle"
@@ -52,13 +70,12 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCancel"
-            style="@style/Widget.Material3.Button.TonalButton"
+            style="@style/Widget.DataSync.Button.Tonal"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_weight="1"
             android:layout_marginEnd="@dimen/spacing_sm"
-            android:text="@string/btn_cancel"
-            android:textAllCaps="false" />
+            android:text="@string/btn_cancel" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSave"
@@ -67,8 +84,7 @@
             android:layout_height="52dp"
             android:layout_weight="1"
             android:layout_marginStart="@dimen/spacing_sm"
-            android:text="@string/btn_save"
-            android:textAllCaps="false" />
+            android:text="@string/btn_save" />
     </LinearLayout>
 
 </LinearLayout>
