@@ -1,0 +1,9 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/md_theme_primary" />
+    <item android:width="120dp" android:height="120dp" android:gravity="center">
+        <shape android:shape="oval">
+            <solid android:color="@color/white" />
+        </shape>
+    </item>
+    <item android:width="72dp" android:height="72dp" android:gravity="center" android:drawable="@drawable/ic_sync" />
+</layer-list>

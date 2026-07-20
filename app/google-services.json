@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "296429614032",
+    "project_id": "datasync-91c90",
+    "storage_bucket": "datasync-91c90.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:296429614032:android:af1f83d08686a8cda5bfd5",
+        "android_client_info": {
+          "package_name": "com.bhushan.datasync.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9mDS9T2hPlsdcmg6Af2uF11pTjDdpi5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

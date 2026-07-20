@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<resources>-->
+<!--    <color name="black">#FF000000</color>-->
+<!--    <color name="white">#FFFFFFFF</color>-->
+<!--</resources>-->
+<resources>
+    <!-- Material 3 seed: Indigo/Teal enterprise palette -->
+    <color name="md_theme_primary">#3F51B5</color>
+    <color name="md_theme_onPrimary">#FFFFFF</color>
+    <color name="md_theme_primaryContainer">#DDE1FF</color>
+    <color name="md_theme_onPrimaryContainer">#00105C</color>
+
+    <color name="md_theme_secondary">#00897B</color>
+    <color name="md_theme_onSecondary">#FFFFFF</color>
+    <color name="md_theme_secondaryContainer">#B2DFDB</color>
+    <color name="md_theme_onSecondaryContainer">#00201C</color>
+
+    <color name="md_theme_error">#BA1A1A</color>
+    <color name="md_theme_onError">#FFFFFF</color>
+    <color name="md_theme_errorContainer">#FFDAD6</color>
+
+    <color name="md_theme_success">#2E7D32</color>
+    <color name="md_theme_warning">#ED6C02</color>
+
+    <color name="md_theme_background">#FBFBFE</color>
+    <color name="md_theme_onBackground">#1B1B1F</color>
+    <color name="md_theme_surface">#FFFFFF</color>
+    <color name="md_theme_surfaceVariant">#E3E2EC</color>
+    <color name="md_theme_onSurface">#1B1B1F</color>
+    <color name="md_theme_onSurfaceVariant">#46464F</color>
+    <color name="md_theme_outline">#C9C6D0</color>
+
+    <color name="text_primary">#1B1B1F</color>
+    <color name="text_secondary">#5F6368</color>
+    <color name="text_hint">#9AA0A6</color>
+    <color name="divider">#E0E0E0</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="admin_badge">#FF6D00</color>
+    <color name="user_badge">#3F51B5</color>
+    <color name="dev_mode_on">#2E7D32</color>
+    <color name="dev_mode_off">#9E9E9E</color>
+
+    <color name="call_incoming">#2E7D32</color>
+    <color name="call_outgoing">#1565C0</color>
+    <color name="call_missed">#C62828</color>
+</resources>

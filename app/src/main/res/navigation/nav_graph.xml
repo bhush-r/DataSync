@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.bhushan.datasync.presentation.dashboard.DashboardFragment"
+        android:label="@string/nav_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/recordsFragment"
+        android:name="com.bhushan.datasync.presentation.records.RecordsFragment"
+        android:label="@string/nav_records"
+        tools:layout="@layout/fragment_records" />
+
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.bhushan.datasync.presentation.contacts.ContactsFragment"
+        android:label="@string/nav_contacts"
+        tools:layout="@layout/fragment_contacts" />
+
+    <fragment
+        android:id="@+id/callLogsFragment"
+        android:name="com.bhushan.datasync.presentation.calllogs.CallLogsFragment"
+        android:label="@string/nav_call_logs"
+        tools:layout="@layout/fragment_call_logs" />
+
+    <fragment
+        android:id="@+id/smsFragment"
+        android:name="com.bhushan.datasync.presentation.sms.SmsFragment"
+        android:label="@string/nav_sms"
+        tools:layout="@layout/fragment_sms" />
+
+    <fragment
+        android:id="@+id/adminPanelFragment"
+        android:name="com.bhushan.datasync.presentation.admin.AdminPanelFragment"
+        android:label="@string/nav_admin"
+        tools:layout="@layout/fragment_admin_panel" />
+
+</navigation>
