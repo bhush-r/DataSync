@@ -10,8 +10,11 @@
         style="@style/Widget.DataSync.TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_md"
+        android:layout_marginHorizontal="@dimen/spacing_md"
+        android:layout_marginTop="@dimen/spacing_md"
+        app:boxBackgroundColor="@color/md_theme_surface"
         app:startIconDrawable="@drawable/ic_search"
+        app:startIconTint="@color/text_hint"
         android:hint="@string/search_hint">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -27,13 +30,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/spacing_md"
+        android:paddingTop="@dimen/spacing_md"
         android:paddingBottom="@dimen/spacing_sm"
+        app:chipSpacingHorizontal="@dimen/spacing_sm"
         app:singleSelection="true"
         app:selectionRequired="false">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipAll"
-            style="@style/Widget.Material3.Chip.Filter"
+            style="@style/Widget.DataSync.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
@@ -41,21 +46,21 @@
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipIncoming"
-            style="@style/Widget.Material3.Chip.Filter"
+            style="@style/Widget.DataSync.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/filter_incoming" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipOutgoing"
-            style="@style/Widget.Material3.Chip.Filter"
+            style="@style/Widget.DataSync.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/filter_outgoing" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipMissed"
-            style="@style/Widget.Material3.Chip.Filter"
+            style="@style/Widget.DataSync.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/filter_missed" />
@@ -71,6 +76,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/spacing_md"
+            android:paddingTop="@dimen/spacing_xs"
             android:paddingBottom="@dimen/spacing_md" />
 
         <ProgressBar

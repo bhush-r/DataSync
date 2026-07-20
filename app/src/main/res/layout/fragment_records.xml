@@ -10,8 +10,11 @@
         style="@style/Widget.DataSync.TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_md"
+        android:layout_marginHorizontal="@dimen/spacing_md"
+        android:layout_marginTop="@dimen/spacing_md"
+        app:boxBackgroundColor="@color/md_theme_surface"
         app:startIconDrawable="@drawable/ic_search"
+        app:startIconTint="@color/text_hint"
         android:hint="@string/search_hint"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -34,7 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingBottom="80dp" />
+            android:paddingTop="@dimen/spacing_xs"
+            android:paddingBottom="88dp" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -58,6 +62,7 @@
         android:contentDescription="@string/add_record"
         app:backgroundTint="@color/md_theme_primary"
         app:tint="@color/white"
+        app:elevation="@dimen/elevation_fab"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

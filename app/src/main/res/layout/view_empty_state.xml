@@ -1,25 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/emptyStateRoot"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
     android:padding="@dimen/spacing_xl">
 
-    <ImageView
-        android:id="@+id/ivEmptyIcon"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:src="@drawable/ic_empty" />
+    <FrameLayout
+        android:layout_width="72dp"
+        android:layout_height="72dp">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_circle"
+            android:backgroundTint="@color/md_theme_surfaceVariant" />
+        <ImageView
+            android:id="@+id/ivEmptyIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_records"
+            app:tint="@color/text_hint"
+            tools:ignore="ContentDescription" />
+    </FrameLayout>
 
+    <TextView
+        android:id="@+id/tvEmptyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:text="@string/empty_state_title"
+        android:textAppearance="@style/TextAppearance.DataSync.Title" />
+
+    <!-- Fragments do: binding.emptyState.tvEmptyMessage.text = resource.message
+         so this id must be exactly tvEmptyMessage, and it needs a sensible
+         default string since the Success-with-empty-list branch never sets it. -->
     <TextView
         android:id="@+id/tvEmptyMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_md"
+        android:layout_marginTop="2dp"
         android:gravity="center"
-        android:text="@string/empty_records"
+        android:text="@string/empty_state_default_message"
         android:textAppearance="@style/TextAppearance.DataSync.Body" />
 
 </LinearLayout>

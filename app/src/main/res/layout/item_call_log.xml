@@ -1,73 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.DataSync.Card.Flat"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:paddingHorizontal="@dimen/spacing_md"
-    android:paddingVertical="@dimen/spacing_sm"
-    android:background="?attr/selectableItemBackground">
-
-    <View
-        android:id="@+id/callTypeIndicator"
-        android:layout_width="4dp"
-        android:layout_height="40dp"
-        android:background="@color/call_incoming" />
+    android:layout_marginTop="@dimen/spacing_xs"
+    app:cardCornerRadius="@dimen/corner_radius_sm">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginStart="@dimen/spacing_md"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="@dimen/spacing_sm">
 
-        <TextView
-            android:id="@+id/tvCallName"
-            android:layout_width="match_parent"
+        <FrameLayout
+            android:layout_width="@dimen/avatar_size"
+            android:layout_height="@dimen/avatar_size">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_circle"
+                android:backgroundTint="@color/md_theme_surfaceVariant" />
+            <ImageView
+                android:layout_width="@dimen/icon_size_sm"
+                android:layout_height="@dimen/icon_size_sm"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_call"
+                app:tint="@color/md_theme_secondary" />
+        </FrameLayout>
+
+        <!-- Kept as a plain colored View (same id/type as before) so any existing
+             adapter code that does callTypeIndicator.setBackgroundColor(...) still works. -->
+        <View
+            android:id="@+id/callTypeIndicator"
+            android:layout_width="4dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="@dimen/spacing_sm"
+            android:background="@color/call_incoming" />
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_title"
-            android:textColor="@color/text_primary"
-            android:maxLines="1"
-            android:ellipsize="end"
-            tools:text="Jane Smith" />
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/spacing_sm"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvCallNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.DataSync.Body"
-            tools:text="+91 91234 56789" />
+            <TextView
+                android:id="@+id/tvCallName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_title"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:maxLines="1"
+                android:ellipsize="end"
+                tools:text="Jane Smith" />
 
-        <TextView
-            android:id="@+id/tvCallType"
+            <TextView
+                android:id="@+id/tvCallNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:textAppearance="@style/TextAppearance.DataSync.Body"
+                tools:text="+91 91234 56789" />
+
+            <TextView
+                android:id="@+id/tvCallType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xs"
+                android:textSize="@dimen/text_size_caption"
+                android:textStyle="bold"
+                tools:text="Incoming" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_caption"
-            android:textStyle="bold"
-            tools:text="Incoming" />
+            android:orientation="vertical"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/tvCallDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                tools:text="02:15" />
+
+            <TextView
+                android:id="@+id/tvCallDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/text_hint"
+                tools:text="12 Jul, 10:30 AM" />
+        </LinearLayout>
+
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="end">
-
-        <TextView
-            android:id="@+id/tvCallDuration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_primary"
-            tools:text="02:15" />
-
-        <TextView
-            android:id="@+id/tvCallDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_caption"
-            android:textColor="@color/text_hint"
-            tools:text="12 Jul, 10:30 AM" />
-    </LinearLayout>
-
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>
