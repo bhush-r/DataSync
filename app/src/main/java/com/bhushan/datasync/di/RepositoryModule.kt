@@ -1,30 +1,13 @@
 package com.bhushan.datasync.di
 
-import com.bhushan.datasync.data.repository.AuthRepositoryImpl
-import com.bhushan.datasync.data.repository.CallLogRepositoryImpl
-import com.bhushan.datasync.data.repository.ContactRepositoryImpl
-import com.bhushan.datasync.data.repository.DashboardRepositoryImpl
-import com.bhushan.datasync.data.repository.RecordRepositoryImpl
-import com.bhushan.datasync.data.repository.SmsRepositoryImpl
-import com.bhushan.datasync.data.repository.UserRepositoryImpl
-import com.bhushan.datasync.domain.repository.AuthRepository
-import com.bhushan.datasync.domain.repository.CallLogRepository
-import com.bhushan.datasync.domain.repository.ContactRepository
-import com.bhushan.datasync.domain.repository.DashboardRepository
-import com.bhushan.datasync.domain.repository.RecordRepository
-import com.bhushan.datasync.domain.repository.SmsRepository
-import com.bhushan.datasync.domain.repository.UserRepository
+import com.bhushan.datasync.data.repository.*
+import com.bhushan.datasync.domain.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-/**
- * Binds every domain [Repository] interface to its concrete Firebase-backed
- * implementation. This is the seam that makes Clean Architecture real here:
- * ViewModels only ever see the interfaces in `domain.repository`.
- */
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
@@ -32,6 +15,10 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindAuthRepository(impl: AuthRepositoryImpl): AuthRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindRegisterRepository(impl: RegisterRepositoryImpl): RegisterRepository
 
     @Binds
     @Singleton

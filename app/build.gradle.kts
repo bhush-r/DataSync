@@ -102,6 +102,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.fragment.ktx)
 //    implementation(libs.fragment.ktx)
-
+    ksp(libs.androidx.hilt.compiler)
     implementation(libs.androidx.datastore.preferences)
 }

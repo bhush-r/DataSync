@@ -22,7 +22,10 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
 
-
+    <!-- Fixes: SecurityException Unknown calling package name 'com.google.android.gms' -->
+    <queries>
+        <package android:name="com.google.android.gms" />
+    </queries>
 
     <application
         android:name=".DataSyncApplication"
@@ -37,22 +40,39 @@
         android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="34">
 
+        <!-- WORKMANAGER HILT INITIALIZER INTERCEPTOR -->
+        <!-- Disables default initialization provider to allow Hilt injection -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="androidx.work.impl.WorkProviderInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+        </provider>
+
         <!-- Launcher Activity -->
         <activity
             android:name=".presentation.splash.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.DataSync.Splash">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <!-- Login -->
         <activity
             android:name=".presentation.auth.LoginActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Register -->
+        <activity
+            android:name=".presentation.auth.RegisterActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
@@ -65,24 +85,19 @@
         <service
             android:name=".service.DataSyncFcmService"
             android:exported="false">
-
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-
         </service>
-
 
         <!-- Boot Receiver -->
         <receiver
             android:name=".receiver.BootCompletedReceiver"
             android:enabled="true"
             android:exported="false">
-
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-
         </receiver>
 
         <!-- Notification Defaults -->
@@ -95,8 +110,8 @@
             android:resource="@color/md_theme_primary" />
 
     </application>
-
 </manifest>
+
 
 
     <!--<?xml version="1.0" encoding="utf-8"?>-->

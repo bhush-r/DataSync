@@ -40,5 +40,4 @@
         android:name="com.bhushan.datasync.presentation.admin.AdminPanelFragment"
         android:label="@string/nav_admin"
         tools:layout="@layout/fragment_admin_panel" />
-
 </navigation>
