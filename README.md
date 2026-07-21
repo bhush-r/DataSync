@@ -139,7 +139,7 @@ com.bhushan.datasync
 
 **1. Clone the Repository:**
 ```bash
-git clone https://github.com/your-username/DataSync.git
+git clone https: https://github.com/bhush-r/DataSync.git
 cd DataSync
 ```
 
