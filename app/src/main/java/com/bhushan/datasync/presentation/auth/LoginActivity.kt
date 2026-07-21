@@ -2,6 +2,7 @@ package com.bhushan.datasync.presentation.auth
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -11,24 +12,15 @@ import com.bhushan.datasync.presentation.main.MainActivity
 import com.bhushan.datasync.utils.Resource
 import com.bhushan.datasync.utils.gone
 import com.bhushan.datasync.utils.textOrEmpty
-import com.bhushan.datasync.utils.toast
 import com.bhushan.datasync.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import androidx.activity.viewModels
 
-/**
- * Requirement #5: Firebase Authentication using Email/Password.
- * Requirement #34: authentication-failure and no-internet handling both
- * surface here via [Resource.Error] messages rendered inline (not just a
- * toast) so the failure state is visible and persistent until corrected.
- */
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-//    private val viewModel: LoginViewModel by androidx.activity.viewModels()
-private val viewModel: LoginViewModel by viewModels()
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +40,7 @@ private val viewModel: LoginViewModel by viewModels()
                 binding.etPassword.textOrEmpty()
             )
         }
-        // Add this click listener to handle redirection to registration
+
         binding.tvGoToRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)

@@ -13,25 +13,14 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/**
- * Schedules [SyncWorker] with WorkManager -- this is what satisfies
- * requirement #27 (automatic background sync) and #26 in its "one-time,
- * triggered from a Sync button" flavour.
- *
- * Both request types require a validated network connection
- * ([NetworkType.CONNECTED]) so a job never wastes battery only to fail on
- * "no internet".
- */
 @Singleton
 class SyncScheduler @Inject constructor(
     private val workManager: WorkManager
 ) {
-
     private val networkConstraints = Constraints.Builder()
         .setRequiredNetworkType(NetworkType.CONNECTED)
         .build()
 
-    /** Enqueues a recurring background sync every [Constants.SYNC_INTERVAL_MINUTES]. */
     fun schedulePeriodicSync() {
         val request = PeriodicWorkRequestBuilder<SyncWorker>(
             Constants.SYNC_INTERVAL_MINUTES, TimeUnit.MINUTES
@@ -47,7 +36,6 @@ class SyncScheduler @Inject constructor(
         )
     }
 
-    /** Enqueues an immediate, one-off sync -- used as a fallback trigger from the UI. */
     fun triggerOneTimeSync() {
         val request = OneTimeWorkRequestBuilder<SyncWorker>()
             .setConstraints(networkConstraints)

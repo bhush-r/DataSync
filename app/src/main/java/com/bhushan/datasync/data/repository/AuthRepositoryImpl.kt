@@ -41,19 +41,33 @@ class AuthRepositoryImpl @Inject constructor(
         try {
             val authResult = firebaseAuth.signInWithEmailAndPassword(email, password).await()
             val uid = authResult.user?.uid
-                ?: throw IllegalStateException("Authentication succeeded but no user id returned")
+                ?: throw IllegalStateException("Authentication succeeded but no user ID returned")
 
-            // Fetch or lazily create the Firestore user profile document.
+            // 1. Fetch user document from Firestore
             val userDocRef = firestore.collection(Constants.COLLECTION_USERS).document(uid)
             val snapshot = userDocRef.get().await()
 
+            // 2. Automatically assign ADMIN role if email ends with @datasync.com, else USER
+            val determinedRole = if (email.trim().endsWith("@datasync.com", ignoreCase = true)) {
+                Role.ADMIN
+            } else {
+                Role.USER
+            }
+
             val user: User = if (snapshot.exists()) {
-                snapshot.toObject(User::class.java) ?: User(uid = uid, email = email)
+                val fetchedUser = snapshot.toObject(User::class.java) ?: User(uid = uid, email = email)
+                // Update role in Firestore if email domain requires ADMIN
+                if (fetchedUser.role != determinedRole && determinedRole == Role.ADMIN) {
+                    userDocRef.update(Constants.FIELD_ROLE, Role.ADMIN.name).await()
+                    fetchedUser.copy(role = Role.ADMIN)
+                } else {
+                    fetchedUser
+                }
             } else {
                 val newUser = User(
                     uid = uid,
                     email = email,
-                    role = Role.USER,
+                    role = determinedRole,
                     devModeEnabled = false,
                     createdAt = System.currentTimeMillis()
                 )
@@ -61,16 +75,18 @@ class AuthRepositoryImpl @Inject constructor(
                 newUser
             }
 
-            // Requirement #6: generate & persist FCM token right after successful login.
+            // 3. Register FCM Token
             val fcmToken = try {
                 FirebaseMessaging.getInstance().token.await()
             } catch (e: Exception) {
                 null
             }
+
             if (!fcmToken.isNullOrBlank() && fcmToken != user.fcmToken) {
                 userDocRef.update(Constants.FIELD_FCM_TOKEN, fcmToken).await()
             }
 
+            // 4. Save session state locally
             sessionManager.saveSession(uid = uid, email = user.email, role = user.role)
             sessionManager.updateDevMode(user.devModeEnabled)
             sessionManager.updateLastSync(user.lastSyncAt)
@@ -86,6 +102,9 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override fun logout() {
+        try {
+            firestore.clearPersistence() // Clear offline data
+        } catch (_: Exception) {}
         firebaseAuth.signOut()
     }
 }

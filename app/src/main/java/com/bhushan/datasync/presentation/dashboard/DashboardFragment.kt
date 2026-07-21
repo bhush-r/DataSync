@@ -25,6 +25,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
+
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DashboardViewModel by viewModels()
