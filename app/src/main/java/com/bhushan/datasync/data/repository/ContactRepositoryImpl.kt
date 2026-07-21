@@ -17,6 +17,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
+import com.google.firebase.firestore.AggregateSource
 
 @Singleton
 class ContactRepositoryImpl @Inject constructor(
@@ -112,7 +113,11 @@ class ContactRepositoryImpl @Inject constructor(
 
     override suspend fun getSyncedCount(uid: String): Int {
         return try {
-            contactsCollection(uid).get().await().size()
+            val snapshot = contactsCollection(uid)
+                .count()
+                .get(AggregateSource.SERVER)
+                .await()
+            snapshot.count.toInt()
         } catch (_: Exception) {
             0
         }

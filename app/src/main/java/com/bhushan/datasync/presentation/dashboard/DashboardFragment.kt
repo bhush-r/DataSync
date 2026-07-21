@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bhushan.datasync.R
 import com.bhushan.datasync.databinding.FragmentDashboardBinding
+import com.bhushan.datasync.domain.model.DashboardStats
 import com.bhushan.datasync.domain.model.Role
 import com.bhushan.datasync.domain.model.SyncState
 import com.bhushan.datasync.permission.PermissionManager
@@ -17,23 +18,15 @@ import com.bhushan.datasync.utils.Resource
 import com.bhushan.datasync.utils.collectFlow
 import com.bhushan.datasync.utils.gone
 import com.bhushan.datasync.utils.setVisibleIf
-import com.bhushan.datasync.utils.toast
 import com.bhushan.datasync.utils.visible
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-/**
- * Requirement #15: Dashboard/Home Screen with all six required stat tiles.
- * Also owns the runtime-permission request flow (requirement #19) since it
- * is the very first screen the user lands on after login.
- */
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
-
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: DashboardViewModel by viewModels()
 
     @Inject
@@ -42,9 +35,7 @@ class DashboardFragment : Fragment() {
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { results ->
-        val allGranted = results.values.all { it }
-        if (allGranted) {
-            toast(getString(R.string.sync_now))
+        if (results.values.all { it }) {
             viewModel.syncNow()
         } else {
             showPermissionDeniedNotice()
@@ -60,17 +51,13 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.loadStats()
             binding.swipeRefresh.isRefreshing = false
         }
-
         binding.btnSyncNow.setOnClickListener { handleSyncClick() }
-
         observeStats()
         observeSyncState()
-
         if (!permissionManager.hasAllPermissions()) {
             requestPermissions()
         }
@@ -92,17 +79,15 @@ class DashboardFragment : Fragment() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.permission_required_title)
             .setMessage(R.string.permission_denied_message)
-            .setPositiveButton(R.string.btn_open_settings) { _, _ -> openAppSettings() }
+            .setPositiveButton(R.string.btn_open_settings) { _, _ ->
+                val intent = android.content.Intent(
+                    android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                    android.net.Uri.fromParts("package", requireContext().packageName, null)
+                )
+                startActivity(intent)
+            }
             .setNegativeButton(R.string.btn_cancel, null)
             .show()
-    }
-
-    private fun openAppSettings() {
-        val intent = android.content.Intent(
-            android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-            android.net.Uri.fromParts("package", requireContext().packageName, null)
-        )
-        startActivity(intent)
     }
 
     private fun observeStats() {
@@ -130,15 +115,18 @@ class DashboardFragment : Fragment() {
         }
     }
 
-    private fun bindStats(stats: com.bhushan.datasync.domain.model.DashboardStats) {
+    private fun bindStats(stats: DashboardStats) {
         binding.tvContactsCount.text = stats.totalContacts.toString()
         binding.tvCallLogsCount.text = stats.totalCallLogs.toString()
         binding.tvSmsCount.text = stats.totalSms.toString()
-        binding.tvLastSync.text = DateUtils.relativeTime(stats.lastSyncAt)
+
+        // Formats full date and time (e.g., 21 Jul 2026, 11:25 AM)
+        binding.tvLastSync.text = DateUtils.formatTimestamp(stats.lastSyncAt)
         binding.tvRole.text = stats.role.name
 
         val isAdmin = stats.role == Role.ADMIN
         binding.devModeCard.setVisibleIf(isAdmin)
+
         if (isAdmin) {
             binding.tvDevModeStatus.text = if (stats.devModeEnabled) {
                 getString(R.string.dev_mode_on)
@@ -146,9 +134,8 @@ class DashboardFragment : Fragment() {
                 getString(R.string.dev_mode_off)
             }
             binding.tvDevModeStatus.setTextColor(
-                resources.getColor(
-                    if (stats.devModeEnabled) R.color.dev_mode_on else R.color.dev_mode_off,
-                    null
+                requireContext().getColor(
+                    if (stats.devModeEnabled) R.color.dev_mode_on else R.color.dev_mode_off
                 )
             )
         }
@@ -174,6 +161,7 @@ class DashboardFragment : Fragment() {
                     binding.syncProgressBar.gone()
                     binding.tvSyncStatus.visible()
                     binding.tvSyncStatus.text = getString(R.string.sync_success)
+                    viewModel.loadStats()
                 }
                 is SyncState.Error -> {
                     binding.btnSyncNow.isEnabled = true

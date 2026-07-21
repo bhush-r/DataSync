@@ -6,12 +6,11 @@ import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 object DateUtils {
-
     private val displayFormat = SimpleDateFormat("dd MMM yyyy, hh:mm a", Locale.getDefault())
     private val shortFormat = SimpleDateFormat("dd MMM, hh:mm a", Locale.getDefault())
 
     fun formatTimestamp(timestampMillis: Long): String {
-        if (timestampMillis <= 0L) return "-"
+        if (timestampMillis <= 0L) return "Never synced"
         return displayFormat.format(Date(timestampMillis))
     }
 
@@ -20,7 +19,6 @@ object DateUtils {
         return shortFormat.format(Date(timestampMillis))
     }
 
-    /** Formats call duration (seconds) as mm:ss */
     fun formatDuration(seconds: Long): String {
         val minutes = TimeUnit.SECONDS.toMinutes(seconds)
         val remainingSeconds = seconds - TimeUnit.MINUTES.toSeconds(minutes)
@@ -29,12 +27,6 @@ object DateUtils {
 
     fun relativeTime(timestampMillis: Long): String {
         if (timestampMillis <= 0L) return "Never synced"
-        val diff = System.currentTimeMillis() - timestampMillis
-        return when {
-            diff < TimeUnit.MINUTES.toMillis(1) -> "Just now"
-            diff < TimeUnit.HOURS.toMillis(1) -> "${TimeUnit.MILLISECONDS.toMinutes(diff)} min ago"
-            diff < TimeUnit.DAYS.toMillis(1) -> "${TimeUnit.MILLISECONDS.toHours(diff)} hr ago"
-            else -> formatTimestamp(timestampMillis)
-        }
+        return formatTimestamp(timestampMillis)
     }
 }
