@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "296429614032",
-    "firebase_url": "https://datasync-91c90-default-rtdb.firebaseio.com",
-    "project_id": "datasync-91c90",
-    "storage_bucket": "datasync-91c90.firebasestorage.app"
+    "project_number": "805324113631",
+    "firebase_url": "https://datasync-607f9-default-rtdb.firebaseio.com",
+    "project_id": "datasync-607f9",
+    "storage_bucket": "datasync-607f9.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:296429614032:android:af1f83d08686a8cda5bfd5",
+        "mobilesdk_app_id": "1:805324113631:android:d901241d2888b6da11cb6a",
         "android_client_info": {
           "package_name": "com.bhushan.datasync.debug"
         }
       },
       "oauth_client": [
         {
-          "client_id": "296429614032-sm1516p5mnm7lahk4rn1uqdvpo96us2a.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.bhushan.datasync.debug",
-            "certificate_hash": "f921304bdd08779d93f8116662f8bf5d18ec0173"
-          }
-        },
-        {
-          "client_id": "296429614032-cinba0tkfcufanbiunapmvns33vosnp0.apps.googleusercontent.com",
+          "client_id": "805324113631-t6ucfecr8fv9nb4rdb5v6sph5sa8ouoa.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD9mDS9T2hPlsdcmg6Af2uF11pTjDdpi5A"
+          "current_key": "AIzaSyBlYxhFrslwz5_WI72eECEWjTShuV-M_1s"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "296429614032-cinba0tkfcufanbiunapmvns33vosnp0.apps.googleusercontent.com",
+              "client_id": "805324113631-t6ucfecr8fv9nb4rdb5v6sph5sa8ouoa.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

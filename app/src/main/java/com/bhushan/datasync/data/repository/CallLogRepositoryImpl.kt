@@ -7,6 +7,7 @@ import com.bhushan.datasync.domain.model.CallType
 import com.bhushan.datasync.domain.repository.CallLogRepository
 import com.bhushan.datasync.utils.Constants
 import com.bhushan.datasync.utils.Resource
+import com.google.firebase.firestore.AggregateSource
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -124,7 +125,11 @@ class CallLogRepositoryImpl @Inject constructor(
 
     override suspend fun getSyncedCount(uid: String): Int {
         return try {
-            callLogsCollection(uid).get().await().size()
+            val snapshot = callLogsCollection(uid)
+                .count()
+                .get(AggregateSource.SERVER)
+                .await()
+            snapshot.count.toInt()
         } catch (_: Exception) {
             0
         }

@@ -6,6 +6,7 @@ import com.bhushan.datasync.domain.model.SmsItem
 import com.bhushan.datasync.domain.repository.SmsRepository
 import com.bhushan.datasync.utils.Constants
 import com.bhushan.datasync.utils.Resource
+import com.google.firebase.firestore.AggregateSource
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -112,7 +113,11 @@ class SmsRepositoryImpl @Inject constructor(
 
     override suspend fun getSyncedCount(uid: String): Int {
         return try {
-            smsCollection(uid).get().await().size()
+            val snapshot = smsCollection(uid)
+                .count()
+                .get(AggregateSource.SERVER)
+                .await()
+            snapshot.count.toInt()
         } catch (_: Exception) {
             0
         }

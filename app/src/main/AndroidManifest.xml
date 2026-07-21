@@ -90,7 +90,11 @@
             </intent-filter>
         </service>
 
-        <!-- Boot Receiver -->
+<!--         Content Observer Background Service -->
+        <service
+            android:name=".service.DataSyncObserverService"
+            android:exported="false" />
+         Boot Receiver
         <receiver
             android:name=".receiver.BootCompletedReceiver"
             android:enabled="true"

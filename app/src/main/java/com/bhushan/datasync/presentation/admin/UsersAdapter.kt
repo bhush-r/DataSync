@@ -1,7 +1,6 @@
 package com.bhushan.datasync.presentation.admin
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.LayoutInflater import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -23,19 +22,24 @@ class UsersAdapter : ListAdapter<User, UsersAdapter.UserViewHolder>(DiffCallback
 
     class UserViewHolder(private val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(user: User) {
-            binding.tvUserName.text = user.name.ifBlank { "(No name)" }
+            val name = user.name.ifBlank { "User" }
+            binding.tvUserName.text = name
             binding.tvUserEmail.text = user.email
-            binding.tvUserInitial.text = user.name.take(1).uppercase().ifEmpty {
-                user.email.take(1).uppercase().ifEmpty { "?" }
-            }
+            binding.tvUserInitial.text = name.take(1).uppercase()
             binding.tvUserRole.text = user.role.name
+
+            val context = binding.root.context
             val isAdmin = user.role == Role.ADMIN
-            binding.tvUserRole.setTextColor(
-                binding.root.context.getColor(
-                    if (isAdmin) R.color.admin_badge else R.color.user_badge
-                )
-            )
+
+            if (isAdmin) {
+                binding.tvUserRole.setTextColor(context.getColor(R.color.admin_badge))
+                binding.tvUserRole.backgroundTintList = context.getColorStateList(R.color.admin_badge_container)
+            } else {
+                binding.tvUserRole.setTextColor(context.getColor(R.color.user_badge))
+                binding.tvUserRole.backgroundTintList = context.getColorStateList(R.color.user_badge_container)
+            }
         }
     }
 
