@@ -105,6 +105,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_md"
                     app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/md_theme_primary"
+                    app:endIconTint="@color/md_theme_primary"
                     android:hint="@string/password_hint">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -141,7 +143,6 @@
                     android:layout_marginTop="@dimen/spacing_md"
                     android:layout_gravity="center"
                     android:visibility="gone" />
-
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

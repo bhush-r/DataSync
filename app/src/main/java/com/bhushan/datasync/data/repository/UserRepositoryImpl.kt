@@ -6,6 +6,7 @@ import com.bhushan.datasync.utils.Constants
 import com.bhushan.datasync.utils.Resource
 import com.bhushan.datasync.utils.SessionManager
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -25,6 +26,10 @@ class UserRepositoryImpl @Inject constructor(
             .document(uid)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
+
+                    if (error.code == FirebaseFirestoreException.Code.PERMISSION_DENIED) {
+                        return@addSnapshotListener
+                    }
                     trySend(Resource.Error(error.localizedMessage ?: "Failed to load profile"))
                     return@addSnapshotListener
                 }

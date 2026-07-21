@@ -24,6 +24,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
+
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
     private var isAdmin = false
@@ -66,9 +67,12 @@ class MainActivity : BaseActivity() {
                 viewModel.currentUser.collect { resource ->
                     if (resource is Resource.Success) {
                         isAdmin = resource.data.role == Role.ADMIN
-                        invalidateOptionsMenu() // Re-inflates menu dynamically when role is updated
+                        invalidateOptionsMenu() // Show/hide Admin Panel menu item dynamically
                     } else if (resource is Resource.Error) {
-                        toast(resource.message)
+
+                        if (authRepository.isUserAuthenticated()) {
+                            toast(resource.message)
+                        }
                     }
                 }
             }
@@ -77,6 +81,7 @@ class MainActivity : BaseActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        // Show Admin Panel option ONLY if logged-in user is ADMIN
         menu.findItem(R.id.action_admin_panel)?.isVisible = isAdmin
         return true
     }
